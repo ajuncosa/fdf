@@ -1,5 +1,5 @@
 NAME		= fdf
-SRCS		=
+SRCS		= main.c
 OBJS		= $(SRCS:.c=.o)
 #HEADERFILES	=
 LIBFT		= libft/libft.a
