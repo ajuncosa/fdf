@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include "fdf.h"
+#include <math.h>
 
 int create_trgb(int t, int r, int g, int b)
 {
@@ -28,114 +29,54 @@ void	my_mlx_pixel_put(t_img_data *img, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-void	swap_line_endpoints(int *x1, int *x2, int *y1, int *y2)
+// en esta funcion encuentro dónde deben estar los puntos (nodos), para luego unirlos. Falta calcular los que tengan z > 0
+void	draw_map(t_img_data *img, t_map_data map)
 {
-	int tmp;
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+	float	y_inc;
+	float	x_inc;
+	int	initial_x;
+	int	initial_y;
+	int	edge_length = 50;
+	float angle = 30 * M_PI / 180;
+	int	nodes[map.map_height * map.map_width][2];
+	int	node = 0;
 
-	tmp = *x1;
-	*x1 = *x2;
-	*x2 = tmp;
-	tmp = *y1;
-	*y1 = *y2;
-	*y2 = tmp;
-}
-
-void	bresenham_line_algorithm(t_img_data *img, int x1, int x2, int y1, int y2, unsigned int color)
-{
-	float	dx;
-	float	dy;
-	int		x;
-	int		y;
-	int		slope_error;
-	float	slope;
-
-	// ensure line is drawn from left to right:
-	if (x2 < x1)
-		swap_line_endpoints(&x1, &x2, &y1, &y2);
-
-	//init some variables
-	dx = x2 - x1;
-	dy = y2 - y1;
-	slope = dy / dx;
-	slope_error = 0;
-	y = y1;
-	x = x1;
-
-	// SMALL POSITIVE SLOPE: y1 < y2, dy < dx
-	// This is the normal case:
-	if (slope >= 0 && slope <= 1)
+	i = 0;
+	initial_x = 200;
+	initial_y = 200;
+	x = initial_x;
+	y = initial_y;
+	y_inc = sin(angle) * edge_length;
+	x_inc = cos(angle) * edge_length;
+	while (i < map.map_height)
 	{
-		while (x <= x2)
+		j = 0;
+		while (j < map.map_width)
 		{
-			my_mlx_pixel_put(img, x, y, color);
-			slope_error += dy;
-			if ((slope_error << 1) >= dx)
-			{
-				y++;
-				slope_error -= dx;
-			}
-			x++;
+			//printf("(%d, %d)\n", x, y);
+			my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
+			nodes[node][0] = x;
+			nodes[node][1] = y;
+			node++;
+			x += x_inc;
+			y += y_inc;
+			j++;
 		}
+		x = initial_x - x_inc;
+		y = initial_y + y_inc;
+		initial_x = x;
+		initial_y = y;
+		i++;
 	}
-	// LARGE POSITIVE SLOPE: y1 < y2, dy > dx
-	// Step over y instead of x: Instead of m <- dy /dx, I calculate
-	// m <- dx / dy so that it'll work for my error variable, therefore
-	// all my calculations have dx and dy swapped (when compared
-	// to small positive slope).
-	else if (slope > 1)
+	node = 0;
+	while (node < map.map_height * map.map_width)
 	{
-		while (y <= y2)
-		{
-			my_mlx_pixel_put(img, x, y, color);
-			slope_error += dx;
-			if ((slope_error << 1) >= dy)
-			{
-				x++;
-				slope_error -= dy;
-			}
-			y++;
-		}
-	}
-	// SMALL NEGATIVE SLOPE: y1 > y2, dy < dx
-	// Error condition changed because of negative m (due to negative dy).
-	// Error update for each step also changed due to this.
-	// Decrease in y instead of increase, because y2 < y1.
-	else if (slope < 0 && slope >= -1)
-	{
-		while (x <= x2)
-		{
-			my_mlx_pixel_put(img, x, y, color);
-			slope_error += dy;
-			if ((slope_error << 1) <= -dx)
-			{
-				y--;
-				slope_error += dx;
-			}
-			x++;
-		}
-	}
-	// LARGE NEGATIVE SLOPE: y1 > y2, dy > dx
-	// Step over y instead of x (as a result, dy and dx are swapped, m <- dx / dy).
-	// Because I am stepping over y, the error condition for negative slopes
-	// does not work in this case, because the errors are calculated from x,
-	// and x1 is always < x2. The exact same logic as large pos. slope applies
-	// here, with the exeption that dy is negative and, as a result, the error
-	// is negative. I needed to change dy's sign so that the error calcs would work the same.
-	// Decrease in y because y2 < y1.
-	else if (slope < -1)
-	{
-		dy = -dy;
-		while (y >= y2)
-		{
-			my_mlx_pixel_put(img, x, y, color);
-			slope_error += dx;
-			if ((slope_error << 1) >= dy)
-			{
-				x++;
-				slope_error -= dy;
-			}
-			y--;
-		}
+		printf("(%d, %d)\n", nodes[node][0], nodes[node][1]);
+		node++;
 	}
 }
 
@@ -144,12 +85,21 @@ int main()
 	void   		*mlx_ptr;
 	void   		*window;
 	t_img_data	img;
+	t_map_data	map;
+	map.map_height = 3;
+	map.map_width = 3;
+	/*int	array[map.map_height][map.map_width] = {
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0}
+	};*/
 
 	mlx_ptr = mlx_init();
 	window = mlx_new_window(mlx_ptr, 600, 400, "hola");
 	img.ptr = mlx_new_image(mlx_ptr, 600, 400);
 	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
-	bresenham_line_algorithm(&img, 300, 0, 50, 100, 0x00FFFFFF);
+	draw_map(&img, map);
+	//bresenham_line_algorithm(&img, 50, 100, 300, 0, 0x00FFFFFF);
 	mlx_put_image_to_window(mlx_ptr, window, img.ptr, 0, 0);
 	mlx_loop(mlx_ptr);
 	return (0);

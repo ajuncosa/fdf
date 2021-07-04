@@ -1,5 +1,5 @@
 NAME		= fdf
-SRCS		= main.c
+SRCS		= main.c bresenham_line_algorithm.c
 OBJS		= $(SRCS:.c=.o)
 #HEADERFILES	=
 LIBFT		= libft/libft.a

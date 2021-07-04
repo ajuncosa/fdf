@@ -24,4 +24,13 @@ typedef struct	s_img_data
 	int		endian;
 }				t_img_data;
 
+typedef struct	s_map_data
+{
+	int map_width;
+	int	map_height;
+}				t_map_data;
+
+void	my_mlx_pixel_put(t_img_data *img, int x, int y, unsigned int color);
+void	bresenham_line_algorithm(t_img_data *img, int x1, int x2, int y1, int y2, unsigned int color);
+
 #endif
