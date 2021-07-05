@@ -1,5 +1,6 @@
 NAME		= fdf
-SRCS		= main.c bresenham_line_algorithm.c
+GNL			= gnl/get_next_line.c
+SRCS		= $(GNL) main.c bresenham_line_algorithm.c error.c parser.c draw_map.c utils.c
 OBJS		= $(SRCS:.c=.o)
 #HEADERFILES	=
 LIBFT		= libft/libft.a
