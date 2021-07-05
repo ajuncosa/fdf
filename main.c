@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:16:25 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/05 17:27:48 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:46:29 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		return (error_custom("Error: wrong number of arguments", 1));
-	parse_map(&map, argv[1]);
+	if (!parse_map(&map, argv[1]))
+		return (1);
 	/*int i = 0;
 	while (i < map.map_height)
 	{

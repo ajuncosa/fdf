@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/05 17:26:33 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/05 20:14:13 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ void	draw_map(t_img_data *img, t_map_data map)
 	int	nodes[map.map_height * map.map_width][2];
 	int	node = 0;
 	int	z;
+	t_coordinates coordinates;
 
-	i = 0;
 	initial_x = SCREEN_WIDTH / 2;
 	initial_y = 0;
 	x = initial_x;
 	y = initial_y;
 	y_inc = sin(angle) * edge_length;
 	x_inc = cos(angle) * edge_length;
+	i = 0;
 	while (i < map.map_height)
 	{
 		j = 0;
@@ -60,10 +61,14 @@ void	draw_map(t_img_data *img, t_map_data map)
 	while (node < map.map_height * map.map_width)
 	{
 		if (j < map.map_height - 1)
-			bresenham_line_algorithm(img, nodes[node][0], nodes[node + map.map_width][0], nodes[node][1], nodes[node + map.map_width][1], 0x00FFFFFF);
+		{
+			coordinates = init_coordinates(nodes[node][0], nodes[node + map.map_width][0], nodes[node][1], nodes[node + map.map_width][1]);
+			bresenham_line_algorithm(img, coordinates, 0x00FFFFFF);
+		}
 		if (i < map.map_width - 1)
 		{
-			bresenham_line_algorithm(img, nodes[node][0], nodes[node + 1][0], nodes[node][1], nodes[node + 1][1], 0x00FFFFFF);
+			coordinates = init_coordinates(nodes[node][0], nodes[node + 1][0], nodes[node][1], nodes[node + 1][1]);
+			bresenham_line_algorithm(img, coordinates, 0x00FFFFFF);
 			i++;
 		}
 		else

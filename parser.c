@@ -6,38 +6,30 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/05 16:03:36 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:12:16 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
 
-//TODO: que me puedan pasar colores
-int	parse_map(t_map_data *map, char *map_file)
+static int	count_map_size(t_map_data *map, const char *map_file)
 {
 	int		fd;
-	int 	ret;
+	int		ret;
 	char	*line;
-	char	**numbers_in_line;
-	int		x;
-	int		y;
-	int		i;
-
-	map->map_width = 0;
-	map->map_height = 0;
-	map->map_array = NULL;
+	char	**numbers_in_one_line;
 
 	fd = open(map_file, O_RDONLY);
 	ret = get_next_line(fd, &line);
 	if (ret <= 0)
 		return (error_custom("Error: empty map or gnl error", 0));
-	numbers_in_line = ft_split(line, ' ');
-	if (!numbers_in_line)
+	numbers_in_one_line = ft_split(line, ' ');
+	if (!numbers_in_one_line)
 		return (error_message(0));
-	while (numbers_in_line[map->map_width])
+	while (numbers_in_one_line[map->map_width])
 		map->map_width++;
-	free_string_array(numbers_in_line);
+	free_string_array(numbers_in_one_line);
 	while (ret > 0)
 	{
 		map->map_height++;
@@ -48,9 +40,14 @@ int	parse_map(t_map_data *map, char *map_file)
 		return (error_custom("Error: there was an error in get_next_line", 0));
 	free(line);
 	close(fd);
+	return (1);
+}
 
-	printf("map_height: %d, map_width: %d\n", map->map_height, map->map_width);
-	map->map_array = malloc(map->map_height * sizeof(int*));
+static int	allocate_map(t_map_data *map)
+{
+	int	i;
+
+	map->map_array = malloc(map->map_height * sizeof(int *));
 	if (!map->map_array)
 		return (error_message(0));
 	i = 0;
@@ -61,6 +58,28 @@ int	parse_map(t_map_data *map, char *map_file)
 			return (error_message(0));
 		i++;
 	}
+	return (1);
+}
+
+static void	fill_map_array(int **map_array, char **numbers_in_line, int y)
+{
+	int	x;
+
+	x = 0;
+	while (numbers_in_line[x])
+	{
+		map_array[y][x] = ft_atoi(numbers_in_line[x]);
+		x++;
+	}
+}
+
+static int	save_numbers_into_map(t_map_data *map, const char *map_file)
+{
+	int		fd;
+	int		ret;
+	char	*line;
+	char	**numbers_in_line;
+	int		y;
 
 	fd = open(map_file, O_RDONLY);
 	ret = get_next_line(fd, &line);
@@ -70,12 +89,7 @@ int	parse_map(t_map_data *map, char *map_file)
 		numbers_in_line = ft_split(line, ' ');
 		if (!numbers_in_line)
 			return (error_message(0));
-		x = 0;
-		while (numbers_in_line[x])
-		{
-			map->map_array[y][x] = ft_atoi(numbers_in_line[x]);
-			x++;
-		}
+		fill_map_array(map->map_array, numbers_in_line, y);
 		y++;
 		free_string_array(numbers_in_line);
 		free(line);
@@ -84,5 +98,20 @@ int	parse_map(t_map_data *map, char *map_file)
 	if (ret == -1)
 		return (error_custom("Error: there was an error in get_next_line", 0));
 	free(line);
+	return (1);
+}
+
+//TODO: que me puedan pasar colores
+int	parse_map(t_map_data *map, const char *map_file)
+{
+	map->map_width = 0;
+	map->map_height = 0;
+	map->map_array = NULL;
+	if (!count_map_size(map, map_file))
+		return (0);
+	if (!allocate_map(map))
+		return (0);
+	if (!save_numbers_into_map(map, map_file))
+		return (0);
 	return (1);
 }
