@@ -6,11 +6,12 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/05 19:12:16 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/06 10:45:34 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "gnl/get_next_line.h"
 #include <fcntl.h>
 
 static int	count_map_size(t_map_data *map, const char *map_file)
