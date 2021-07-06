@@ -54,26 +54,24 @@ void	determine_starting_position(t_draw *draw, t_map_data map)
 	drawing_width = a + b;
 	drawing_height = c + d;
 	//margin = 10;
-	
-//asumiendo que drawing_width > drawing_height:
-float	scale = SCREEN_WIDTH / drawing_width;
-draw->initial_x = a * scale;
-float suma = map.map_height + map.map_width;
-float div = drawing_width / suma;
-printf("%f, %f, %f\n", drawing_width, suma, div);
-draw->edge_length = div / cos(draw->angle);
 
-/*	//TODO: si el array tiene más números que px tiene la pantalla
-	if (drawing_width < SCREEN_WIDTH && drawing_height < SCREEN_HEIGHT)
+
+//asumiendo que tengo que ajustarlo de ancho pero no de alto
+	float	sum = map.map_width + map.map_height;
+	draw->x_inc = SCREEN_WIDTH / (sum - 2); // para contar sólo los huecos entre puntos en vez de los puntos
+	draw->y_inc = draw->x_inc * tan(draw->angle);
+
+	//TODO: qué hacer si el array tiene más números que px tiene la pantalla
+	/*if (drawing_width < SCREEN_WIDTH && drawing_height < SCREEN_HEIGHT)
 	{
-		if (drawing_width >= drawing_height) // FIXME: el drawing_width siempre es mayor que el drawing_height creo???
-			draw->edge_length = SCREEN_WIDTH / (drawing_width);
+		if (drawing_width >= drawing_height) // FIXME: el drawing_width siempre es mayor que el drawing_height creo??? cambiar esta condición por si la forma de la pantalla es otra, aunque sea más ancho que largo, tal vez tenga que tener en cuenta la altura envez de la anchura
+			draw->edge_length = SCREEN_WIDTH / sum;
 		else
 			draw->edge_length = SCREEN_HEIGHT / drawing_height;
 	}*/
-	printf("drawing w: %f, drawing h: %f\n", drawing_width, drawing_height);
-	printf("a: %f, map h: %d\n", a, map.map_height);
-	//draw->initial_x = a * draw->edge_length;
+	//printf("drawing w: %f, drawing h: %f\n", drawing_width, drawing_height);
+	//printf("a: %f, map h: %d\n", a, map.map_height);
+	draw->initial_x = (map.map_height - 1) * draw->x_inc;
 	draw->initial_y = 0;
 }
 
@@ -95,9 +93,9 @@ void	draw_map(t_img_data *img, t_map_data map)
 	draw.x = draw.initial_x;
 	draw.y = draw.initial_y;
 	
-	printf("starting point: (%d, %d), edge length: %f\n", draw.initial_x, draw.initial_y, draw.edge_length);
-	draw.y_inc = sin(draw.angle) * draw.edge_length;
-	draw.x_inc = cos(draw.angle) * draw.edge_length;
+	//printf("starting point: (%d, %d), edge length: %f\n", draw.initial_x, draw.initial_y, draw.edge_length);
+	//draw.y_inc = sin(draw.angle) * draw.edge_length;
+	//draw.x_inc = cos(draw.angle) * draw.edge_length;
 	i = 0;
 
 	while (i < map.map_height)

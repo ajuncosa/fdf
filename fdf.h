@@ -16,9 +16,10 @@
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 # include <stdio.h>
-# define SCREEN_WIDTH 2000
-# define SCREEN_HEIGHT 1200
-
+//# define SCREEN_WIDTH 2000
+//# define SCREEN_HEIGHT 1200
+# define SCREEN_WIDTH 1000
+# define SCREEN_HEIGHT 600
 typedef struct s_img_data
 {
 	void	*ptr;
@@ -45,7 +46,7 @@ typedef struct s_draw
 	float	x_inc;
 	float	y_inc;
 	float	angle;
-	float	edge_length;
+	//float	edge_length;
 }			t_draw;
 
 typedef struct s_coordinates

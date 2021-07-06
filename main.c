@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	}*/
 
 	mlx_ptr = mlx_init();
-	window = mlx_new_window(mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "hola");
+	window = mlx_new_window(mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "FdF");
 	img.ptr = mlx_new_image(mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
 	draw_map(&img, map);
