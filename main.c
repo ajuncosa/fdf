@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:16:25 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 13:13:37 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 13:37:17 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int main(int argc, char **argv)
 		return (error_custom("Error: wrong number of arguments", 1));
 	if (!parse_map(&data.map, argv[1]))
 		return (1);
-
 	data.mlx.ptr = mlx_init();
 	data.mlx.window = mlx_new_window(data.mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "FdF");
 	data.img.ptr = mlx_new_image(data.mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT);

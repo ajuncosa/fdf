@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 13:13:25 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 16:56:03 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define SCREEN_HEIGHT 1200
 //# define SCREEN_WIDTH 1000
 //# define SCREEN_HEIGHT 600
+
 typedef struct s_img_data
 {
 	void	*ptr;
@@ -56,10 +57,10 @@ typedef struct s_draw
 	int		z;
 	int		initial_x;
 	int		initial_y;
-	float	x_inc;
-	float	y_inc;
+	int		x_inc;
+	int		y_inc;
 	float	angle;
-	//float	edge_length;
+	int		margin;
 }			t_draw;
 
 typedef struct s_coordinates
