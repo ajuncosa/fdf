@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:16:25 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 19:30:55 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:00:23 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	if (!parse_map(&data.map, argv[1]))
 		return (1);
 
-	data.draw.altitude = 5;
+	data.draw.altitude = 0.3;
 	data.draw.margin = 100;
 	data.draw.traslation.x = 0;
 	data.draw.traslation.y = 0;

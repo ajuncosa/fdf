@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 19:24:34 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 19:59:28 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,18 @@ static void	determine_starting_position(t_draw *draw, t_map_data map)
 
 static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
 {
-	int	i;
-	int	j;
-	int	node;
-	float	start_x;
-	float	start_y;
+	int		i;
+	int		j;
+	int		node;
+	float	start_line_x;
+	float	start_line_y;
+	float	edge_length;
 
-	start_x = draw->initial_x;
-	start_y = draw->initial_y;
-
-	draw->x = start_x;
-	draw->y = start_y;
+	start_line_x = draw->initial_x;
+	start_line_y = draw->initial_y;
+	draw->x = start_line_x;
+	draw->y = start_line_y;
+	edge_length = draw->x_inc / cos(draw->angle);
 	i = 0;
 	node = 0;
 	while (i < map.map_height)
@@ -54,7 +55,7 @@ static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
 		j = 0;
 		while (j < map.map_width)
 		{	
-			draw->z = map.map_array[i][j] * draw->altitude;
+			draw->z = map.map_array[i][j] * edge_length * draw->altitude;
 			nodes[node].x = draw->x;
 			nodes[node].y = draw->y - draw->z;
 			node++;
@@ -62,10 +63,10 @@ static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
 			draw->y += draw->y_inc;
 			j++;
 		}
-		draw->x = start_x - draw->x_inc;
-		draw->y = start_y + draw->y_inc;
-		start_x = draw->x;
-		start_y = draw->y;
+		draw->x = start_line_x - draw->x_inc;
+		draw->y = start_line_y + draw->y_inc;
+		start_line_x = draw->x;
+		start_line_y = draw->y;
 		i++;
 	}
 }
@@ -131,7 +132,7 @@ int	draw_map(t_data *data)
 	t_node	*nodes;
 
 	clear_map_from_image(&data->img);
-		
+
 	nodes = malloc(data->map.map_height * data->map.map_width * sizeof(t_node));
 	determine_starting_position(&data->draw, data->map);
 	create_array_of_nodes(&data->draw, data->map, nodes);

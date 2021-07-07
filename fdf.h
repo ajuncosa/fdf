@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 19:29:52 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 19:59:17 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_draw
 	float			y_inc;
 	float			angle;
 	int				margin;
-	int				altitude;
+	float			altitude;
 	t_traslation	traslation;
 }			t_draw;
 
@@ -126,8 +126,7 @@ int				xbutton_close(t_data *data);
 int				handle_mousepress(int button, int x, int y, t_draw *draw);
 
 int				parse_map(t_map_data *map, const char *map_file);
-
-int			draw_map(t_data *data);
+int				draw_map(t_data *data);
 
 
 #endif
