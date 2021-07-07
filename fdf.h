@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 16:56:03 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 19:29:52 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,17 @@
 # include <stdio.h>
 # define SCREEN_WIDTH 2000
 # define SCREEN_HEIGHT 1200
-//# define SCREEN_WIDTH 1000
-//# define SCREEN_HEIGHT 600
+
+typedef enum e_keys
+{
+	ESC = 53,
+	ARROW_LEFT = 123,
+	ARROW_RIGHT = 124,
+	ARROW_DOWN = 125,
+	ARROW_UP = 126,
+	NINE = 25,
+	ONE = 18,
+}	t_keys;
 
 typedef struct s_img_data
 {
@@ -43,25 +52,40 @@ typedef struct s_map_data
 	int	map_height;
 }		t_map_data;
 
+typedef struct s_traslation
+{
+	int	x;
+	int	y;
+}		t_traslation;
+
+typedef struct s_draw
+{
+	float			x;
+	float			y;
+	float			z;
+	float			initial_x;
+	float			initial_y;
+	float			x_inc;
+	float			y_inc;
+	float			angle;
+	int				margin;
+	int				altitude;
+	t_traslation	traslation;
+}			t_draw;
+
+typedef struct s_node
+{
+	int	x;
+	int	y;
+}		t_node;
+
 typedef struct s_data
 {
 	t_img_data	img;
 	t_map_data	map;
 	t_mlx		mlx;
+	t_draw		draw;
 }				t_data;
-
-typedef struct s_draw
-{
-	int		x;
-	int		y;
-	int		z;
-	int		initial_x;
-	int		initial_y;
-	int		x_inc;
-	int		y_inc;
-	float	angle;
-	int		margin;
-}			t_draw;
 
 typedef struct s_coordinates
 {
@@ -99,9 +123,11 @@ void			exit_fdf(t_data *data);
 /* Events */
 int				handle_keypress(int keycode, t_data *data);
 int				xbutton_close(t_data *data);
+int				handle_mousepress(int button, int x, int y, t_draw *draw);
 
 int				parse_map(t_map_data *map, const char *map_file);
 
-void			draw_map(t_img_data *img, t_map_data map);
+int			draw_map(t_data *data);
+
 
 #endif
