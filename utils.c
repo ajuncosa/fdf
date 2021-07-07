@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:27:14 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 18:52:08 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:15:57 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ t_coordinates	init_coordinates(int x1, int x2, int y1, int y2)
 	coordinates.y1 = y1;
 	coordinates.y2 = y2;
 	return (coordinates);
+}
+
+int	get_index(int x, int y, int width)
+{
+	return (y * width + x);
 }

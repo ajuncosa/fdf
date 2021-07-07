@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 19:59:17 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:40:01 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_mlx
 typedef struct s_map_data
 {
 	int	**map_array;
+	int	*color_array;
 	int	map_width;
 	int	map_height;
 }		t_map_data;
@@ -77,6 +78,7 @@ typedef struct s_node
 {
 	int	x;
 	int	y;
+	int	color;
 }		t_node;
 
 typedef struct s_data
@@ -100,18 +102,19 @@ void			my_mlx_pixel_put(t_img_data *img,
 					int x, int y, unsigned int color);
 int				create_trgb(int t, int r, int g, int b);
 t_coordinates	init_coordinates(int x1, int x2, int y1, int y2);
+int				get_index(int x, int y, int width);
 
 /* Bresenham line algorithm */
 void			bresenham_line_algorithm(t_img_data *img,
-					t_coordinates coordinates, unsigned int color);
+					t_coordinates coordinates, unsigned int color1, unsigned int color2);
 void			bresenham_small_positive_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color);
+					t_coordinates coordinates, unsigned int color1, unsigned int color2);
 void			bresenham_large_positive_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color);
+					t_coordinates coordinates, unsigned int color1, unsigned int color2);
 void			bresenham_small_negative_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color);
+					t_coordinates coordinates, unsigned int color1, unsigned int color2);
 void			bresenham_large_negative_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color);
+					t_coordinates coordinates, unsigned int color1, unsigned int color2);
 
 /* Errors and frees */
 int				error_custom(char *message, int ret);

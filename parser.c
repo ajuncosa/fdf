@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 12:22:16 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:44:31 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,28 @@ static int	allocate_map(t_map_data *map)
 			return (error_message(0));
 		i++;
 	}
+	map->color_array = malloc(map->map_height * map->map_width * sizeof(int));
+	if (!map->color_array)
+		return (error_message(0));
 	return (1);
 }
 
-static void	fill_map_array(int **map_array, char **numbers_in_line, int y)
+static void	fill_map_array(t_map_data *map, char **numbers_in_line, int y)
 {
-	int	x;
+	int		x;
+	int		index;
+	char	*color;
 
 	x = 0;
 	while (numbers_in_line[x])
 	{
-		map_array[y][x] = ft_atoi(numbers_in_line[x]);
+		map->map_array[y][x] = ft_atoi(numbers_in_line[x]);
+		index = get_index(x, y, map->map_width);
+		color = ft_strchr(numbers_in_line[x], ',');
+		if (color)
+			map->color_array[index] = (unsigned int)color;
+		else
+			map->color_array[index] = create_trgb(0, 255, 255, 255);
 		x++;
 	}
 }
@@ -94,7 +105,7 @@ static int	save_numbers_into_map(t_map_data *map, const char *map_file)
 		numbers_in_line = ft_split(line, ' ');
 		if (!numbers_in_line)
 			return (error_message(0));
-		fill_map_array(map->map_array, numbers_in_line, y);
+		fill_map_array(map, numbers_in_line, y);
 		y++;
 		free_string_array(numbers_in_line);
 		free(line);

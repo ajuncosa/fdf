@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 19:16:15 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 18:30:02 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:42:54 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	swap_line_endpoints(int *x1, int *x2, int *y1, int *y2)
 }
 
 void	bresenham_line_algorithm(t_img_data *img,
-	t_coordinates coordinates, unsigned int color)
+	t_coordinates coordinates, unsigned int color1, unsigned int color2)
 {
 	float	dx;
 	float	dy;
@@ -39,11 +39,11 @@ void	bresenham_line_algorithm(t_img_data *img,
 	dy = coordinates.y2 - coordinates.y1;
 	slope = dy / dx;
 	if (slope >= 0 && slope <= 1)
-		bresenham_small_positive_slope(img, coordinates, color);
+		bresenham_small_positive_slope(img, coordinates, color1, color2);
 	else if (slope > 1)
-		bresenham_large_positive_slope(img, coordinates, color);
+		bresenham_large_positive_slope(img, coordinates, color1, color2);
 	else if (slope < 0 && slope >= -1)
-		bresenham_small_negative_slope(img, coordinates, color);
+		bresenham_small_negative_slope(img, coordinates, color1, color2);
 	else if (slope < -1)
-		bresenham_large_negative_slope(img, coordinates, color);
+		bresenham_large_negative_slope(img, coordinates, color1, color2);
 }

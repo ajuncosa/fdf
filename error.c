@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:57:13 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 12:45:27 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:09:49 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	exit_fdf(t_data *data)
 	if (data->mlx.window)
 		mlx_destroy_window(data->mlx.ptr, data->mlx.window);
 	free_map_array(&data->map);
+	free(data->map.color_array);
 	exit(0);
 }
