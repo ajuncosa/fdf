@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/06 15:29:01 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 10:58:28 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,26 @@ y axis /       						   \     /           \ x axis
 
 void	determine_starting_position(t_draw *draw, t_map_data map)
 {
-	float	drawing_width; 
-	float	drawing_height;
-	float	a;
-	float	b;
-	float	c;
-	float	d;
-	//int		margin;
+	//float	drawing_width; 
+	//float	drawing_height;
+	//float	a;
+	//float	b;
+	//float	c;
+	//float	d;
+	int		margin;
 
-	a = cos(draw->angle) * map.map_height;
+	/*a = cos(draw->angle) * map.map_height;
 	b = cos(draw->angle) * map.map_width;
 	c = sin(draw->angle) * map.map_width;
 	d = sin(draw->angle) * map.map_height;
 	drawing_width = a + b;
-	drawing_height = c + d;
-	//margin = 10;
+	drawing_height = c + d;*/
+	margin = 100;
 
 
 //asumiendo que tengo que ajustarlo de ancho pero no de alto
-	float	sum = map.map_width + map.map_height;
-	draw->x_inc = SCREEN_WIDTH / (sum - 2); // para contar sólo los huecos entre puntos en vez de los puntos
+	float	map_sides_sum = map.map_width + map.map_height;
+	draw->x_inc = (SCREEN_WIDTH - margin) / (map_sides_sum - 2); // para contar sólo los huecos entre puntos en vez de los puntos
 	draw->y_inc = draw->x_inc * tan(draw->angle);
 
 	//TODO: qué hacer si el array tiene más números que px tiene la pantalla
@@ -71,8 +71,8 @@ void	determine_starting_position(t_draw *draw, t_map_data map)
 	}*/
 	//printf("drawing w: %f, drawing h: %f\n", drawing_width, drawing_height);
 	//printf("a: %f, map h: %d\n", a, map.map_height);
-	draw->initial_x = (map.map_height - 1) * draw->x_inc;
-	draw->initial_y = 0;
+	draw->initial_x = margin / 2 + round((map.map_height - 1) * draw->x_inc);
+	draw->initial_y = margin / 2;
 }
 
 void	draw_map(t_img_data *img, t_map_data map)
@@ -86,7 +86,7 @@ void	draw_map(t_img_data *img, t_map_data map)
 	draw.angle = 30 * M_PI / 180;
 	int	nodes[map.map_height * map.map_width][2];
 	int	node = 0;
-	altitude = 0;
+	altitude = 5;
 
 	determine_starting_position(&draw, map);
 

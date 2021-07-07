@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/06 13:52:49 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 13:13:25 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 # include <stdio.h>
-//# define SCREEN_WIDTH 2000
-//# define SCREEN_HEIGHT 1200
-# define SCREEN_WIDTH 1000
-# define SCREEN_HEIGHT 600
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 1200
+//# define SCREEN_WIDTH 1000
+//# define SCREEN_HEIGHT 600
 typedef struct s_img_data
 {
 	void	*ptr;
@@ -29,12 +29,25 @@ typedef struct s_img_data
 	int		endian;
 }			t_img_data;
 
+typedef struct s_mlx
+{
+	void	*ptr;
+	void	*window;
+}			t_mlx;
+
 typedef struct s_map_data
 {
 	int	**map_array;
 	int	map_width;
 	int	map_height;
 }		t_map_data;
+
+typedef struct s_data
+{
+	t_img_data	img;
+	t_map_data	map;
+	t_mlx		mlx;
+}				t_data;
 
 typedef struct s_draw
 {
@@ -79,6 +92,12 @@ void			bresenham_large_negative_slope(t_img_data *img,
 int				error_custom(char *message, int ret);
 int				error_message(int ret);
 void			free_string_array(char **str);
+void			free_map_array(t_map_data *map);
+void			exit_fdf(t_data *data);
+
+/* Events */
+int				handle_keypress(int keycode, t_data *data);
+int				xbutton_close(t_data *data);
 
 int				parse_map(t_map_data *map, const char *map_file);
 

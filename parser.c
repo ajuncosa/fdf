@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/06 10:45:34 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/07 12:22:16 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int	count_map_size(t_map_data *map, const char *map_file)
 	char	**numbers_in_one_line;
 
 	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		return (error_message(0));
 	ret = get_next_line(fd, &line);
 	if (ret <= 0)
 		return (error_custom("Error: empty map or gnl error", 0));
@@ -83,6 +85,8 @@ static int	save_numbers_into_map(t_map_data *map, const char *map_file)
 	int		y;
 
 	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		return (error_message(0));
 	ret = get_next_line(fd, &line);
 	y = 0;
 	while (ret > 0)
