@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 20:44:31 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 14:14:06 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ static void	fill_map_array(t_map_data *map, char **numbers_in_line, int y)
 		index = get_index(x, y, map->map_width);
 		color = ft_strchr(numbers_in_line[x], ',');
 		if (color)
-			map->color_array[index] = (unsigned int)color;
+			map->color_array[index] = ft_atoi_base(color + 1, 16);
 		else
-			map->color_array[index] = create_trgb(0, 255, 255, 255);
+			map->color_array[index] = 0xFFFFFF;
+		//printf("%d\n", map->color_array[index]);
 		x++;
 	}
 }

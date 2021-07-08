@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 20:40:01 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 13:51:34 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,22 @@ typedef struct s_draw
 	int				margin;
 	float			altitude;
 	t_traslation	traslation;
-}			t_draw;
+}					t_draw;
+
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+	unsigned int	hex;
+}					t_color;
 
 typedef struct s_node
 {
-	int	x;
-	int	y;
-	int	color;
-}		t_node;
+	int		x;
+	int		y;
+	t_color	color;
+}			t_node;
 
 typedef struct s_data
 {
@@ -95,26 +103,30 @@ typedef struct s_coordinates
 	int	x2;
 	int	y1;
 	int	y2;
-}				t_coordinates;
+}		t_coordinates;
+
 
 /* Utils */
 void			my_mlx_pixel_put(t_img_data *img,
 					int x, int y, unsigned int color);
-int				create_trgb(int t, int r, int g, int b);
 t_coordinates	init_coordinates(int x1, int x2, int y1, int y2);
 int				get_index(int x, int y, int width);
+t_color			color_create_rgb(int r, int g, int b);
+t_color			color_create_hex(int hex);
+//t_color			color_set_r(t_color *color, int r);
+
 
 /* Bresenham line algorithm */
 void			bresenham_line_algorithm(t_img_data *img,
-					t_coordinates coordinates, unsigned int color1, unsigned int color2);
+					t_coordinates coordinates, t_color color1, t_color color2);
 void			bresenham_small_positive_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color1, unsigned int color2);
+					t_coordinates coordinates, t_color color1, t_color color2);
 void			bresenham_large_positive_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color1, unsigned int color2);
+					t_coordinates coordinates, t_color color1, t_color color2);
 void			bresenham_small_negative_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color1, unsigned int color2);
+					t_coordinates coordinates, t_color color1, t_color color2);
 void			bresenham_large_negative_slope(t_img_data *img,
-					t_coordinates coordinates, unsigned int color1, unsigned int color2);
+					t_coordinates coordinates, t_color color1, t_color color2);
 
 /* Errors and frees */
 int				error_custom(char *message, int ret);

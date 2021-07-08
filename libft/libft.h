@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 11:18:24 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/05/11 14:11:35 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 13:59:23 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 int				ft_strcmp(char *s1, char *s2);
 long			ft_atol(const char *str);
+int				ft_atoi_base(const char *str, int str_base);
 
 #endif

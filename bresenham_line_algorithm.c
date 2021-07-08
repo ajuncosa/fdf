@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 19:16:15 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 20:42:54 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 12:58:43 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	swap_line_endpoints(int *x1, int *x2, int *y1, int *y2)
 }
 
 void	bresenham_line_algorithm(t_img_data *img,
-	t_coordinates coordinates, unsigned int color1, unsigned int color2)
+	t_coordinates coordinates, t_color color1, t_color color2)
 {
 	float	dx;
 	float	dy;

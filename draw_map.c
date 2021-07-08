@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/07 20:45:21 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 12:59:51 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
 	float	start_line_x;
 	float	start_line_y;
 	float	edge_length;
+	int		color;
 
 	start_line_x = draw->initial_x;
 	start_line_y = draw->initial_y;
@@ -58,7 +59,8 @@ static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
 			draw->z = map.map_array[i][j] * edge_length * draw->altitude;
 			nodes[node].x = draw->x;
 			nodes[node].y = draw->y - draw->z;
-			nodes[node].color = map.color_array[get_index(j, i, map.map_width)];
+			color = map.color_array[get_index(j, i, map.map_width)];
+			nodes[node].color = color_create_hex(color);
 			node++;
 			draw->x += draw->x_inc;
 			draw->y += draw->y_inc;
@@ -114,16 +116,14 @@ void	clear_map_from_image(t_img_data *img)
 {
 	int	i;
 	int	j;
-	int color;
 
-	color = create_trgb(0, 0, 0, 0);
 	i = 0;
 	while (i < SCREEN_HEIGHT)
 	{
 		j = 0;
 		while (j < SCREEN_WIDTH)
 		{
-			my_mlx_pixel_put(img, j, i, color);
+			my_mlx_pixel_put(img, j, i, 0x000000);
 			j++;
 		}
 		i++;
