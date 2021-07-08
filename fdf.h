@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 13:51:34 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:51:53 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ typedef struct s_draw
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	int				r;
+	int				g;
+	int				b;
 	unsigned int	hex;
 }					t_color;
 
@@ -113,8 +113,6 @@ t_coordinates	init_coordinates(int x1, int x2, int y1, int y2);
 int				get_index(int x, int y, int width);
 t_color			color_create_rgb(int r, int g, int b);
 t_color			color_create_hex(int hex);
-//t_color			color_set_r(t_color *color, int r);
-
 
 /* Bresenham line algorithm */
 void			bresenham_line_algorithm(t_img_data *img,

@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 12:59:51 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:20:39 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ int	draw_map(t_data *data)
 	t_node	*nodes;
 
 	clear_map_from_image(&data->img);
-
 	nodes = malloc(data->map.map_height * data->map.map_width * sizeof(t_node));
 	determine_starting_position(&data->draw, data->map);
 	create_array_of_nodes(&data->draw, data->map, nodes);
