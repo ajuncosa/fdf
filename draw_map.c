@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 15:20:39 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 17:09:33 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
 			nodes[node].y = draw->y - draw->z;
 			color = map.color_array[get_index(j, i, map.map_width)];
 			nodes[node].color = color_create_hex(color);
+			//printf("node %d: %d, %d, %d\n", node, nodes[node].color.r, nodes[node].color.g, nodes[node].color.b);
 			node++;
 			draw->x += draw->x_inc;
 			draw->y += draw->y_inc;

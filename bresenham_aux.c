@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 20:15:53 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 13:50:23 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 17:44:51 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	bresenham_small_negative_slope(t_img_data *img,
 	{
 		position = (x - coordinates.x1) / dx;
 		color = color_create_rgb(color1.r * (1 - position) + color2.r * position, color1.g * (1 - position) + color2.g * position, color1.b * (1 - position) + color2.b * position);
-
 		my_mlx_pixel_put(img, x, y, color.hex);
 		slope_error += dy;
 		if ((slope_error << 1) <= -dx)
@@ -148,9 +147,8 @@ void	bresenham_large_negative_slope(t_img_data *img,
 	slope_error = 0;
 	while (y >= coordinates.y2)
 	{
-		position = (y - coordinates.y1) / dy;
+		position = (y - coordinates.y2) / dy;
 		color = color_create_rgb(color1.r * (1 - position) + color2.r * position, color1.g * (1 - position) + color2.g * position, color1.b * (1 - position) + color2.b * position);
-
 		my_mlx_pixel_put(img, x, y, color.hex);
 		slope_error += dx;
 		if ((slope_error << 1) >= dy)
