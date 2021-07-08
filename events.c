@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 13:12:38 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 15:20:07 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 16:17:51 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ int	handle_keypress(int keycode, t_data *data)
 {
 	if (keycode == ESC)
 		exit_fdf(data);
-	else if (keycode == ARROW_LEFT)
+	else if (keycode == A_KEY)
 		data->draw.traslation.x -= 10;
-	else if (keycode == ARROW_RIGHT)
+	else if (keycode == D_KEY)
 		data->draw.traslation.x += 10;
-	else if (keycode == ARROW_UP)
+	else if (keycode == W_KEY)
 		data->draw.traslation.y -= 10;
-	else if (keycode == ARROW_DOWN)
+	else if (keycode == S_KEY)
 		data->draw.traslation.y += 10;
-	else if (keycode == NINE)
+	else if (keycode == ARROW_UP)
 		data->draw.altitude += 0.02;
-	else if (keycode == ONE)
+	else if (keycode == ARROW_DOWN)
 		data->draw.altitude -= 0.02;
 	return (0);
 }

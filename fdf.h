@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 15:51:53 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/08 16:17:05 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 typedef enum e_keys
 {
 	ESC = 53,
-	ARROW_LEFT = 123,
-	ARROW_RIGHT = 124,
 	ARROW_DOWN = 125,
 	ARROW_UP = 126,
-	NINE = 25,
-	ONE = 18,
+	A_KEY = 0,
+	S_KEY = 1,
+	D_KEY = 2, 
+	W_KEY = 13
 }	t_keys;
 
 typedef struct s_img_data
