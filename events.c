@@ -17,13 +17,13 @@ int	handle_keypress(int keycode, t_data *data)
 	if (keycode == ESC)
 		exit_fdf(data);
 	else if (keycode == A_KEY)
-		data->draw.traslation.x -= 10;
-	else if (keycode == D_KEY)
 		data->draw.traslation.x += 10;
+	else if (keycode == D_KEY)
+		data->draw.traslation.x -= 10;
 	else if (keycode == W_KEY)
-		data->draw.traslation.y -= 10;
-	else if (keycode == S_KEY)
 		data->draw.traslation.y += 10;
+	else if (keycode == S_KEY)
+		data->draw.traslation.y -= 10;
 	else if (keycode == ARROW_UP)
 		data->draw.altitude += 0.02;
 	else if (keycode == ARROW_DOWN)

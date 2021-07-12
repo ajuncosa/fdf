@@ -34,7 +34,6 @@ int main(int argc, char **argv)
 	mlx_hook(data.mlx.window, 2, 0L, handle_keypress, &data);
 	mlx_hook(data.mlx.window, 17, 0L, xbutton_close, &data);
 	mlx_hook(data.mlx.window, 4, 0L, handle_mousepress, &data.draw);
-
 	mlx_loop(data.mlx.ptr);
 	return (0);
 }

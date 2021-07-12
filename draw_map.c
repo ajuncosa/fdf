@@ -61,7 +61,6 @@ static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
 			nodes[node].y = draw->y - draw->z;
 			color = map.color_array[get_index(j, i, map.map_width)];
 			nodes[node].color = color_create_hex(color);
-			//printf("node %d: %d, %d, %d\n", node, nodes[node].color.r, nodes[node].color.g, nodes[node].color.b);
 			node++;
 			draw->x += draw->x_inc;
 			draw->y += draw->y_inc;

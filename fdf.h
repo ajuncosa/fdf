@@ -16,8 +16,10 @@
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 # include <stdio.h>
-# define SCREEN_WIDTH 2000
-# define SCREEN_HEIGHT 1200
+//# define SCREEN_WIDTH 2000
+//# define SCREEN_HEIGHT 1200
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
 typedef enum e_keys
 {

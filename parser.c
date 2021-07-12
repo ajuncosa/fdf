@@ -14,29 +14,30 @@
 #include "gnl/get_next_line.h"
 #include <fcntl.h>
 
-//FIXME: escribir error si falta numero en el mapa
-
 static int	count_map_size(t_map_data *map, const char *map_file)
 {
 	int		fd;
 	int		ret;
 	char	*line;
 	char	**numbers_in_one_line;
+	int		count;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		return (error_message(0));
 	ret = get_next_line(fd, &line);
-	if (ret <= 0)
-		return (error_custom("Error: empty map or gnl error", 0));
-	numbers_in_one_line = ft_split(line, ' ');
-	if (!numbers_in_one_line)
-		return (error_message(0));
-	while (numbers_in_one_line[map->map_width])
-		map->map_width++;
-	free_string_array(numbers_in_one_line);
 	while (ret > 0)
 	{
+		numbers_in_one_line = ft_split(line, ' ');
+		if (!numbers_in_one_line)
+			return (error_message(0));
+		count = 0;
+		while (numbers_in_one_line[count])
+			count++;
+		if (map->map_width != 0 && count != map->map_width)
+			return (error_custom("Error: all lines in map must have the same number of numbers", 0));
+		map->map_width = count;
+		free_string_array(numbers_in_one_line);
 		map->map_height++;
 		free(line);
 		ret = get_next_line(fd, &line);
@@ -119,7 +120,6 @@ static int	save_numbers_into_map(t_map_data *map, const char *map_file)
 	return (1);
 }
 
-//TODO: que me puedan pasar colores
 int	parse_map(t_map_data *map, const char *map_file)
 {
 	map->map_width = 0;
