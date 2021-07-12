@@ -3,51 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 18:21:20 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:46:01 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "gnl/get_next_line.h"
 #include <fcntl.h>
-
-static int	count_map_size(t_map_data *map, const char *map_file)
-{
-	int		fd;
-	int		ret;
-	char	*line;
-	char	**numbers_in_one_line;
-	int		count;
-
-	fd = open(map_file, O_RDONLY);
-	if (fd == -1)
-		return (error_message(0));
-	ret = get_next_line(fd, &line);
-	while (ret > 0)
-	{
-		numbers_in_one_line = ft_split(line, ' ');
-		if (!numbers_in_one_line)
-			return (error_message(0));
-		count = 0;
-		while (numbers_in_one_line[count])
-			count++;
-		if (map->map_width != 0 && count != map->map_width)
-			return (error_custom("Error: all lines in map must have the same number of numbers", 0));
-		map->map_width = count;
-		free_string_array(numbers_in_one_line);
-		map->map_height++;
-		free(line);
-		ret = get_next_line(fd, &line);
-	}
-	if (ret == -1)
-		return (error_custom("Error: there was an error in get_next_line", 0));
-	free(line);
-	close(fd);
-	return (1);
-}
 
 static int	allocate_map(t_map_data *map)
 {
@@ -90,17 +55,13 @@ static void	fill_map_array(t_map_data *map, char **numbers_in_line, int y)
 	}
 }
 
-static int	save_numbers_into_map(t_map_data *map, const char *map_file)
+static int	save_numbers_into_map(t_map_data *map, int fd)
 {
-	int		fd;
 	int		ret;
 	char	*line;
 	char	**numbers_in_line;
 	int		y;
 
-	fd = open(map_file, O_RDONLY);
-	if (fd == -1)
-		return (error_message(0));
 	ret = get_next_line(fd, &line);
 	y = 0;
 	while (ret > 0)
@@ -115,21 +76,30 @@ static int	save_numbers_into_map(t_map_data *map, const char *map_file)
 		ret = get_next_line(fd, &line);
 	}
 	if (ret == -1)
-		return (error_custom("Error: there was an error in get_next_line", 0));
+		return (error_custom("there was an error in get_next_line", 0));
 	free(line);
 	return (1);
 }
 
 int	parse_map(t_map_data *map, const char *map_file)
 {
+	int	fd;
+
 	map->map_width = 0;
 	map->map_height = 0;
 	map->map_array = NULL;
-	if (!count_map_size(map, map_file))
+	map->color_array = NULL;
+	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		return (error_message(0));
+	if (!count_map_size(map, fd))
 		return (0);
 	if (!allocate_map(map))
 		return (0);
-	if (!save_numbers_into_map(map, map_file))
+	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		return (error_message(0));
+	if (!save_numbers_into_map(map, fd))
 		return (0);
 	return (1);
 }

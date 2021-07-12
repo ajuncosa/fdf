@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 13:12:38 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 16:22:25 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:52:58 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	handle_mousepress(int button, int x, int y, t_draw *draw)
 {
 	y += 0;
 	x += 0;
-		if (button == 4)
-			draw->margin -= 100;
-		else if (button == 5 && draw->margin < SCREEN_WIDTH - 100)
-			draw->margin += 100;
+	if (button == 4)
+		draw->margin -= 100;
+	else if (button == 5 && draw->margin < SCREEN_WIDTH - 100)
+		draw->margin += 100;
 	return (0);
 }

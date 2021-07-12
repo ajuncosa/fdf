@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:27:14 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 14:09:21 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:53:31 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_index(int x, int y, int width)
 	return (y * width + x);
 }
 
-t_color color_create_rgb(int r, int g, int b)
+t_color	color_create_rgb(int r, int g, int b)
 {
 	t_color	color;
 
@@ -51,9 +51,9 @@ t_color color_create_rgb(int r, int g, int b)
 	return (color);
 }
 
-t_color color_create_hex(int hex)
+t_color	color_create_hex(int hex)
 {
-	t_color color;
+	t_color	color;
 
 	color.hex = hex;
 	color.r = (hex & (0xFF << 16)) >> 16;

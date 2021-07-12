@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 16:17:05 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:46:39 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef enum e_keys
 	ARROW_UP = 126,
 	A_KEY = 0,
 	S_KEY = 1,
-	D_KEY = 2, 
+	D_KEY = 2,
 	W_KEY = 13
 }	t_keys;
 
@@ -107,7 +107,6 @@ typedef struct s_coordinates
 	int	y2;
 }		t_coordinates;
 
-
 /* Utils */
 void			my_mlx_pixel_put(t_img_data *img,
 					int x, int y, unsigned int color);
@@ -140,8 +139,9 @@ int				handle_keypress(int keycode, t_data *data);
 int				xbutton_close(t_data *data);
 int				handle_mousepress(int button, int x, int y, t_draw *draw);
 
+/* Main functions */
+int				count_map_size(t_map_data *map, int fd);
 int				parse_map(t_map_data *map, const char *map_file);
 int				draw_map(t_data *data);
-
 
 #endif
