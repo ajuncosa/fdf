@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 17:09:33 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/13 16:44:53 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,58 +30,41 @@ static void	determine_starting_position(t_draw *draw, t_map_data map)
 	}
 	extra_space_x = (SCREEN_WIDTH - map_edges_sum * draw->x_inc) / 2;
 	extra_space_y = (SCREEN_HEIGHT - map_edges_sum * draw->y_inc) / 2;
-	draw->initial_x = draw->traslation.x  + extra_space_x + (map.map_height - 1) * draw->x_inc;
+	draw->initial_x = draw->traslation.x + extra_space_x
+		+ (map.map_height - 1) * draw->x_inc;
 	draw->initial_y = draw->traslation.y + extra_space_y;
 }
 
-static void	create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes)
+static void	draw_vertical_edge(t_img_data *img, int map_width,
+	t_node *nodes, int node)
 {
-	int		i;
-	int		j;
-	int		node;
-	float	start_line_x;
-	float	start_line_y;
-	float	edge_length;
-	int		color;
+	int				next_y;
+	t_coordinates	coordinates;
 
-	start_line_x = draw->initial_x;
-	start_line_y = draw->initial_y;
-	draw->x = start_line_x;
-	draw->y = start_line_y;
-	edge_length = draw->x_inc / cos(draw->angle);
-	i = 0;
-	node = 0;
-	while (i < map.map_height)
-	{
-		j = 0;
-		while (j < map.map_width)
-		{	
-			draw->z = map.map_array[i][j] * edge_length * draw->altitude;
-			nodes[node].x = draw->x;
-			nodes[node].y = draw->y - draw->z;
-			color = map.color_array[get_index(j, i, map.map_width)];
-			nodes[node].color = color_create_hex(color);
-			node++;
-			draw->x += draw->x_inc;
-			draw->y += draw->y_inc;
-			j++;
-		}
-		draw->x = start_line_x - draw->x_inc;
-		draw->y = start_line_y + draw->y_inc;
-		start_line_x = draw->x;
-		start_line_y = draw->y;
-		i++;
-	}
+	next_y = node + map_width;
+	coordinates = init_coordinates(nodes[node].x, nodes[next_y].x,
+			nodes[node].y, nodes[next_y].y);
+	bresenham_line_algorithm(img, coordinates, nodes[node].color,
+		nodes[next_y].color);
+}
+
+static void	draw_horizontal_edge(t_img_data *img, t_node *nodes, int node)
+{
+	int				next_x;
+	t_coordinates	coordinates;
+
+	next_x = node + 1;
+	coordinates = init_coordinates(nodes[node].x, nodes[next_x].x,
+			nodes[node].y, nodes[next_x].y);
+	bresenham_line_algorithm(img, coordinates, nodes[node].color,
+		nodes[next_x].color);
 }
 
 static void	draw_edge_lines(t_img_data *img, t_map_data map, t_node *nodes)
 {
-	int				node;
-	int				i;
-	int				j;
-	t_coordinates	coordinates;
-	int				next_x;
-	int				next_y;
+	int	node;
+	int	i;
+	int	j;
 
 	node = 0;
 	i = 0;
@@ -89,18 +72,10 @@ static void	draw_edge_lines(t_img_data *img, t_map_data map, t_node *nodes)
 	while (node < map.map_height * map.map_width)
 	{
 		if (j < map.map_height - 1)
-		{
-			next_y = node + map.map_width;
-			coordinates = init_coordinates(nodes[node].x, nodes[next_y].x,
-				nodes[node].y, nodes[next_y].y);
-			bresenham_line_algorithm(img, coordinates, nodes[node].color, nodes[next_y].color);
-		}
+			draw_vertical_edge(img, map.map_width, nodes, node);
 		if (i < map.map_width - 1)
 		{
-			next_x = node + 1;
-			coordinates = init_coordinates(nodes[node].x, nodes[next_x].x,
-				nodes[node].y, nodes[next_x].y);
-			bresenham_line_algorithm(img, coordinates, nodes[node].color, nodes[next_x].color);
+			draw_horizontal_edge(img, nodes, node);
 			i++;
 		}
 		else
@@ -109,24 +84,6 @@ static void	draw_edge_lines(t_img_data *img, t_map_data map, t_node *nodes)
 			j++;
 		}
 		node++;
-	}
-}
-
-void	clear_map_from_image(t_img_data *img)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < SCREEN_HEIGHT)
-	{
-		j = 0;
-		while (j < SCREEN_WIDTH)
-		{
-			my_mlx_pixel_put(img, j, i, 0x000000);
-			j++;
-		}
-		i++;
 	}
 }
 
@@ -140,6 +97,7 @@ int	draw_map(t_data *data)
 	create_array_of_nodes(&data->draw, data->map, nodes);
 	draw_edge_lines(&data->img, data->map, nodes);
 	free(nodes);
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.window, data->img.ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx.ptr, data->mlx.window,
+		data->img.ptr, 0, 0);
 	return (0);
 }
