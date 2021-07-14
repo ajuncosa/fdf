@@ -6,12 +6,11 @@
 /*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 20:15:53 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/14 16:29:18 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/14 17:21:42 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-//FIXME: color gradient
 
 // SMALL POSITIVE SLOPE: y1 < y2, dy < dx
 void	bresenham_small_positive_slope(t_img_data *img,
@@ -116,6 +115,9 @@ void	bresenham_small_negative_slope(t_img_data *img,
 ** the exeption that dy is negative and, as a result, the error is negative. I
 ** needed to change dy's sign so that the error calcs would work the same.
 ** Decrease in y because y2 < y1.
+** Swap colours in colour gradient, because when calculating position (number
+** between 0 and 1 to calculate de proportion of colours), it goes from 1 to 0
+** instead of 0 to 1 (because initial y - y2 is dy).
 */
 void	bresenham_large_negative_slope(t_img_data *img,
 	t_coordinates coordinates, t_color color1, t_color color2)
@@ -133,7 +135,7 @@ void	bresenham_large_negative_slope(t_img_data *img,
 	while (y >= coordinates.y2)
 	{
 		bresen_vars.position = (y - coordinates.y2) / bresen_vars.dy;
-		bresen_vars.color = color_create_rgb(color1.r * (1 - bresen_vars.position) + color2.r * bresen_vars.position, color1.g * (1 - bresen_vars.position) + color2.g * bresen_vars.position, color1.b * (1 - bresen_vars.position) + color2.b * bresen_vars.position);
+		bresen_vars.color = color_create_rgb(color2.r * (1 - bresen_vars.position) + color1.r * bresen_vars.position, color2.g * (1 - bresen_vars.position) + color1.g * bresen_vars.position, color2.b * (1 - bresen_vars.position) + color1.b * bresen_vars.position);
 		my_mlx_pixel_put(img, x, y, bresen_vars.color.hex);
 		bresen_vars.slope_error += bresen_vars.dx;
 		if ((bresen_vars.slope_error << 1) >= bresen_vars.dy)
