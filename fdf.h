@@ -6,7 +6,7 @@
 /*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/13 16:43:52 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/14 13:50:45 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_draw
 	float			angle;
 	int				margin;
 	float			altitude;
+	float			edge_length;
+	int				color;
 	t_traslation	traslation;
 }					t_draw;
 
@@ -106,6 +108,15 @@ typedef struct s_coordinates
 	int	y1;
 	int	y2;
 }		t_coordinates;
+
+typedef struct s_bresenham
+{
+	float	dx;
+	float	dy;
+	int		slope_error;
+	t_color	color;
+	float	position;
+}		t_bresenham;
 
 /* Utils */
 void			my_mlx_pixel_put(t_img_data *img,

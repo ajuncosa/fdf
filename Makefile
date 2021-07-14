@@ -2,7 +2,7 @@ NAME		= fdf
 GNL			= gnl/get_next_line.c
 SRCS		= $(GNL) main.c bresenham_line_algorithm.c bresenham_aux.c events.c error.c parser.c parser_aux.c draw_map.c draw_map_aux.c utils.c
 OBJS		= $(SRCS:.c=.o)
-#HEADERFILES	=
+HEADERFILES	= fdf.h
 LIBFT		= libft/libft.a
 MINILIBX	= minilibx/libmlx.a
 CC			= gcc

@@ -6,7 +6,7 @@
 /*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 17:45:40 by anajuncosa        #+#    #+#             */
-/*   Updated: 2021/07/12 17:47:59 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/14 15:35:02 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	count_map_size(t_map_data *map, int fd)
 	}
 	if (ret == -1)
 		return (error_custom("there was an error in get_next_line", 0));
-	if (!map->map_height || !map->map_height)
+	if (!map->map_height || !map->map_width)
 		return (error_custom("wrongly formatted or empty map", 0));
 	free(line);
 	close(fd);

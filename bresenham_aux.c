@@ -3,42 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham_aux.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 20:15:53 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 17:44:51 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/14 16:29:18 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+//FIXME: color gradient
 
 // SMALL POSITIVE SLOPE: y1 < y2, dy < dx
 void	bresenham_small_positive_slope(t_img_data *img,
 	t_coordinates coordinates, t_color color1, t_color color2)
 {
-	int		x;
-	int		y;
-	float	dx;
-	float	dy;
-	int		slope_error;
-	t_color	color;
-	float	position;
+	int			x;
+	int			y;
+	t_bresenham	bresen_vars;
 
 	y = coordinates.y1;
 	x = coordinates.x1;
-	dx = coordinates.x2 - coordinates.x1;
-	dy = coordinates.y2 - coordinates.y1;
-	slope_error = 0;
+	bresen_vars.dx = coordinates.x2 - coordinates.x1;
+	bresen_vars.dy = coordinates.y2 - coordinates.y1;
+	bresen_vars.slope_error = 0;
 	while (x <= coordinates.x2)
 	{
-		position = (x - coordinates.x1) / dx;
-		color = color_create_rgb(color1.r * (1 - position) + color2.r * position, color1.g * (1 - position) + color2.g * position, color1.b * (1 - position) + color2.b * position);
-		my_mlx_pixel_put(img, x, y, color.hex);
-		slope_error += dy;
-		if ((slope_error << 1) >= dx)
+		bresen_vars.position = (x - coordinates.x1) / bresen_vars.dx;
+		bresen_vars.color = color_create_rgb(color1.r * (1 - bresen_vars.position) + color2.r * bresen_vars.position, color1.g * (1 - bresen_vars.position) + color2.g * bresen_vars.position, color1.b * (1 - bresen_vars.position) + color2.b * bresen_vars.position);
+		my_mlx_pixel_put(img, x, y, bresen_vars.color.hex);
+		bresen_vars.slope_error += bresen_vars.dy;
+		if ((bresen_vars.slope_error << 1) >= bresen_vars.dx)
 		{
 			y++;
-			slope_error -= dx;
+			bresen_vars.slope_error -= bresen_vars.dx;
 		}
 		x++;
 	}
@@ -53,29 +50,25 @@ void	bresenham_small_positive_slope(t_img_data *img,
 void	bresenham_large_positive_slope(t_img_data *img,
 	t_coordinates coordinates, t_color color1, t_color color2)
 {
-	int		x;
-	int		y;
-	float	dx;
-	float	dy;
-	int		slope_error;
-	t_color	color;
-	float	position;
+	int			x;
+	int			y;
+	t_bresenham	bresen_vars;
 
 	y = coordinates.y1;
 	x = coordinates.x1;
-	dx = coordinates.x2 - coordinates.x1;
-	dy = coordinates.y2 - coordinates.y1;
-	slope_error = 0;
+	bresen_vars.dx = coordinates.x2 - coordinates.x1;
+	bresen_vars.dy = coordinates.y2 - coordinates.y1;
+	bresen_vars.slope_error = 0;
 	while (y <= coordinates.y2)
 	{
-		position = (y - coordinates.y1) / dy;
-		color = color_create_rgb(color1.r * (1 - position) + color2.r * position, color1.g * (1 - position) + color2.g * position, color1.b * (1 - position) + color2.b * position);
-		my_mlx_pixel_put(img, x, y, color.hex);
-		slope_error += dx;
-		if ((slope_error << 1) >= dy)
+		bresen_vars.position = (y - coordinates.y1) / bresen_vars.dy;
+		bresen_vars.color = color_create_rgb(color1.r * (1 - bresen_vars.position) + color2.r * bresen_vars.position, color1.g * (1 - bresen_vars.position) + color2.g * bresen_vars.position, color1.b * (1 - bresen_vars.position) + color2.b * bresen_vars.position);
+		my_mlx_pixel_put(img, x, y, bresen_vars.color.hex);
+		bresen_vars.slope_error += bresen_vars.dx;
+		if ((bresen_vars.slope_error << 1) >= bresen_vars.dy)
 		{
 			x++;
-			slope_error -= dy;
+			bresen_vars.slope_error -= bresen_vars.dy;
 		}
 		y++;
 	}
@@ -90,29 +83,25 @@ void	bresenham_large_positive_slope(t_img_data *img,
 void	bresenham_small_negative_slope(t_img_data *img,
 	t_coordinates coordinates, t_color color1, t_color color2)
 {
-	int		x;
-	int		y;
-	float	dx;
-	float	dy;
-	int		slope_error;
-	t_color	color;
-	float	position;
+	int			x;
+	int			y;
+	t_bresenham	bresen_vars;
 
 	y = coordinates.y1;
 	x = coordinates.x1;
-	dx = coordinates.x2 - coordinates.x1;
-	dy = coordinates.y2 - coordinates.y1;
-	slope_error = 0;
+	bresen_vars.dx = coordinates.x2 - coordinates.x1;
+	bresen_vars.dy = coordinates.y2 - coordinates.y1;
+	bresen_vars.slope_error = 0;
 	while (x <= coordinates.x2)
 	{
-		position = (x - coordinates.x1) / dx;
-		color = color_create_rgb(color1.r * (1 - position) + color2.r * position, color1.g * (1 - position) + color2.g * position, color1.b * (1 - position) + color2.b * position);
-		my_mlx_pixel_put(img, x, y, color.hex);
-		slope_error += dy;
-		if ((slope_error << 1) <= -dx)
+		bresen_vars.position = (x - coordinates.x1) / bresen_vars.dx;
+		bresen_vars.color = color_create_rgb(color1.r * (1 - bresen_vars.position) + color2.r * bresen_vars.position, color1.g * (1 - bresen_vars.position) + color2.g * bresen_vars.position, color1.b * (1 - bresen_vars.position) + color2.b * bresen_vars.position);
+		my_mlx_pixel_put(img, x, y, bresen_vars.color.hex);
+		bresen_vars.slope_error += bresen_vars.dy;
+		if ((bresen_vars.slope_error << 1) <= -bresen_vars.dx)
 		{
 			y--;
-			slope_error += dx;
+			bresen_vars.slope_error += bresen_vars.dx;
 		}
 		x++;
 	}
@@ -131,30 +120,26 @@ void	bresenham_small_negative_slope(t_img_data *img,
 void	bresenham_large_negative_slope(t_img_data *img,
 	t_coordinates coordinates, t_color color1, t_color color2)
 {
-	int		x;
-	int		y;
-	float	dx;
-	float	dy;
-	int		slope_error;
-	t_color	color;
-	float	position;
+	int			x;
+	int			y;
+	t_bresenham	bresen_vars;
 
 	y = coordinates.y1;
 	x = coordinates.x1;
-	dx = coordinates.x2 - coordinates.x1;
-	dy = coordinates.y2 - coordinates.y1;
-	dy = -dy;
-	slope_error = 0;
+	bresen_vars.dx = coordinates.x2 - coordinates.x1;
+	bresen_vars.dy = coordinates.y2 - coordinates.y1;
+	bresen_vars.dy = -bresen_vars.dy;
+	bresen_vars.slope_error = 0;
 	while (y >= coordinates.y2)
 	{
-		position = (y - coordinates.y2) / dy;
-		color = color_create_rgb(color1.r * (1 - position) + color2.r * position, color1.g * (1 - position) + color2.g * position, color1.b * (1 - position) + color2.b * position);
-		my_mlx_pixel_put(img, x, y, color.hex);
-		slope_error += dx;
-		if ((slope_error << 1) >= dy)
+		bresen_vars.position = (y - coordinates.y2) / bresen_vars.dy;
+		bresen_vars.color = color_create_rgb(color1.r * (1 - bresen_vars.position) + color2.r * bresen_vars.position, color1.g * (1 - bresen_vars.position) + color2.g * bresen_vars.position, color1.b * (1 - bresen_vars.position) + color2.b * bresen_vars.position);
+		my_mlx_pixel_put(img, x, y, bresen_vars.color.hex);
+		bresen_vars.slope_error += bresen_vars.dx;
+		if ((bresen_vars.slope_error << 1) >= bresen_vars.dy)
 		{
 			x++;
-			slope_error -= dy;
+			bresen_vars.slope_error -= bresen_vars.dy;
 		}
 		y--;
 	}
