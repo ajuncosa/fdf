@@ -6,11 +6,11 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 20:15:53 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/16 11:46:28 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:10:33 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 static t_color	calculate_color_in_gradient(t_color color1, t_color color2,
 	float position)

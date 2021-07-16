@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham_line_algorithm.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 19:16:15 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/14 16:23:54 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/16 16:10:38 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 // To ensure that the line is drawn from left to right
 static void	swap_line_endpoints(int *x1, int *x2, int *y1, int *y2)

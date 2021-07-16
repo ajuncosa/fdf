@@ -6,12 +6,12 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 17:45:40 by anajuncosa        #+#    #+#             */
-/*   Updated: 2021/07/16 13:27:41 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:11:07 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "libft/get_next_line.h"
+#include "../fdf.h"
+#include "../libft/get_next_line.h"
 
 static int	count_line_width(t_map_data *map, char *line)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map_aux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 11:23:03 by anajuncosa        #+#    #+#             */
-/*   Updated: 2021/07/14 13:44:05 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/16 16:10:40 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 #include <math.h>
 
 static void	init_vars_for_nodes_array(t_draw *draw, float *start_line_x,
