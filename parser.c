@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/12 17:46:01 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/16 13:24:52 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "gnl/get_next_line.h"
+#include "libft/get_next_line.h"
 #include <fcntl.h>
 
 static int	allocate_map(t_map_data *map)

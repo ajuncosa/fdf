@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_aux.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 17:45:40 by anajuncosa        #+#    #+#             */
-/*   Updated: 2021/07/14 15:35:02 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/16 13:27:41 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "gnl/get_next_line.h"
+#include "libft/get_next_line.h"
 
 static int	count_line_width(t_map_data *map, char *line)
 {

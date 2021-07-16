@@ -6,7 +6,7 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 14:32:44 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 18:15:47 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:03:45 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
-# define BUFFER_SIZE 500
+# include "libft.h"
+# define BUFFER_SIZE 2048
 
 int		get_next_line(int fd, char **line);
 
