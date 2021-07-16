@@ -6,12 +6,12 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 13:58:24 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/08 14:12:57 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/16 11:48:40 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
- 
+
 int	get_digit(char c, int digits_in_base)
 {
 	int	max_digit;
@@ -27,7 +27,7 @@ int	get_digit(char c, int digits_in_base)
 	else
 		return (-1);
 }
- 
+
 int	ft_atoi_base(const char *str, int str_base)
 {
 	int	result;
@@ -43,12 +43,13 @@ int	ft_atoi_base(const char *str, int str_base)
 		sign = -1;
 		++str;
 	}
-	while ((digit = get_digit(ft_tolower(*str), str_base)) >= 0)
+	digit = get_digit(ft_tolower(*str), str_base);
+	while (digit >= 0)
 	{
 		result = result * str_base;
 		result = result + (digit * sign);
 		++str;
+		digit = get_digit(ft_tolower(*str), str_base);
 	}
 	return (result);
 }
- 

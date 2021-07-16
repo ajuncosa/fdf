@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:10:42 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/14 13:50:45 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/16 11:51:09 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 # include <stdio.h>
-//# define SCREEN_WIDTH 2000
-//# define SCREEN_HEIGHT 1200
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 680
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 1200
+//# define SCREEN_WIDTH 1280
+//# define SCREEN_HEIGHT 680
 
 typedef enum e_keys
 {
@@ -152,7 +152,8 @@ int				handle_mousepress(int button, int x, int y, t_draw *draw);
 
 /* Draw map auxiliary functions */
 void			clear_map_from_image(t_img_data *img);
-void			create_array_of_nodes(t_draw *draw, t_map_data map, t_node *nodes);
+void			create_array_of_nodes(t_draw *draw, t_map_data map,
+					t_node *nodes);
 
 /* Main functions */
 int				count_map_size(t_map_data *map, int fd);
