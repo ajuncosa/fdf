@@ -1,20 +1,22 @@
 NAME		:= fdf
-SRCS		:= srcs/main.c \
-				srcs/bresenham_line_algorithm.c \
-				srcs/bresenham_aux.c \
-				srcs/events.c \
-				srcs/error.c \
-				srcs/parser.c \
-				srcs/parser_aux.c \
-				srcs/draw_map.c \
-				srcs/draw_map_aux.c \
-				srcs/utils.c
+SRCS_DIR	:= ./srcs
+OBJS_DIR	:= ./objs
+SRCS		:= main.c \
+				bresenham_line_algorithm.c \
+				bresenham_aux.c \
+				events.c \
+				error.c \
+				parser.c \
+				parser_aux.c \
+				draw_map.c \
+				draw_map_aux.c \
+				utils.c
 OBJS		:= $(SRCS:.c=.o)
 HEADERFILES	:= fdf.h
 LIBFT		:= libft/libft.a
 MINILIBX	:= minilibx/libmlx.a
 CC			= gcc
-RM			= rm -f
+RM			= rm -rf
 COMMON		=
 CFLAGS		?= -Wall -Werror -Wextra $(COMMON)
 LDFLAGS		?= -L minilibx/ -lmlx -framework OPENGL -framework Appkit -L libft/ -lft $(COMMON)
@@ -24,7 +26,8 @@ $(NAME): $(OBJS) $(MINILIBX) $(LIBFT)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 %.o: %.c $(HEADERFILES)
-	$(CC) -c $(CFLAGS) $< -o $@
+	@mkdir -p objs
+	$(CC) -c $(CFLAGS) $< -o objs/$@
 
 all: $(NAME)
 
@@ -38,7 +41,7 @@ debug:	COMMON += $(SANITIZE)
 debug:	re
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) objs
 	$(MAKE) clean -C libft/
 	$(MAKE) clean -C minilibx/
 
