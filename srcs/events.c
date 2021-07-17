@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 13:12:38 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/16 16:10:47 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/17 14:10:03 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	xbutton_close(t_data *data)
 
 int	handle_mousepress(int button, int x, int y, t_draw *draw)
 {
-	y += 0;
-	x += 0;
+	(void)y;
+	(void)x;
 	if (button == 4)
 		draw->margin -= 100;
 	else if (button == 5 && draw->margin < SCREEN_WIDTH - 100)

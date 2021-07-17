@@ -1,7 +1,7 @@
 NAME		:= fdf
 SRCS_DIR	:= ./srcs
 OBJS_DIR	:= ./objs
-SRCS		:= main.c \
+SRCS_LIST	:= main.c \
 				bresenham_line_algorithm.c \
 				bresenham_aux.c \
 				events.c \
@@ -11,7 +11,10 @@ SRCS		:= main.c \
 				draw_map.c \
 				draw_map_aux.c \
 				utils.c
-OBJS		:= $(SRCS:.c=.o)
+OBJS_LIST	:= $(SRCS_LIST:.c=.o)
+SRCS		:= $(addprefix $(SRCS_DIR)/,$(SRCS_LIST))
+OBJS		:= $(addprefix $(OBJS_DIR)/,$(OBJS_LIST))
+
 HEADERFILES	:= fdf.h
 LIBFT		:= libft/libft.a
 MINILIBX	:= minilibx/libmlx.a
@@ -25,9 +28,9 @@ SANITIZE	= -g3 -fsanitize=address
 $(NAME): $(OBJS) $(MINILIBX) $(LIBFT)
 	$(CC) $(LDFLAGS) $^ -o $@
 
-%.o: %.c $(HEADERFILES)
-	@mkdir -p objs
-	$(CC) -c $(CFLAGS) $< -o objs/$@
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERFILES)
+	@mkdir -p $(OBJS_DIR)
+	$(CC) -c $(CFLAGS) $< -o $@
 
 all: $(NAME)
 
