@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 18:16:25 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/17 15:49:33 by anajuncosa       ###   ########.fr       */
+/*   Created: 2021/07/17 15:46:38 by anajuncosa        #+#    #+#             */
+/*   Updated: 2021/07/17 15:46:50 by anajuncosa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-int	handle_keypress(int keycode, t_data *data)
-{
-	if (keycode == ESC)
-		exit_fdf(data);
-	return (0);
-}
-
-int	xbutton_close(t_data *data)
-{
-	exit_fdf(data);
-	return (0);
-}
 
 int	main(int argc, char **argv)
 {
@@ -46,6 +33,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx.ptr, draw_map, &data);
 	mlx_hook(data.mlx.window, 2, 0L, handle_keypress, &data);
 	mlx_hook(data.mlx.window, 17, 0L, xbutton_close, &data);
+	mlx_hook(data.mlx.window, 4, 0L, handle_mousepress, &data.draw);
 	mlx_loop(data.mlx.ptr);
 	return (0);
 }
