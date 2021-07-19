@@ -6,11 +6,12 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:27:14 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/16 16:10:55 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/19 13:12:18 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include <fdf.h>
+#include <lines.h>
 
 void	my_mlx_pixel_put(t_img_data *img, int x, int y, unsigned int color)
 {

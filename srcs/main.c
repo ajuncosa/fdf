@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:16:25 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/17 15:49:33 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/19 13:07:01 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include <fdf.h>
+#include <events.h>
 
 int	handle_keypress(int keycode, t_data *data)
 {

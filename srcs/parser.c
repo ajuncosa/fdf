@@ -6,12 +6,12 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:59:26 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/16 16:11:03 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/19 13:13:14 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
-#include "../libft/get_next_line.h"
+#include <fdf.h>
+#include <get_next_line.h>
 #include <fcntl.h>
 
 static int	allocate_map(t_map_data *map)

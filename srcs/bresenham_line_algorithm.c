@@ -6,11 +6,12 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 19:16:15 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/16 16:10:38 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/19 13:11:15 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include <fdf.h>
+#include <lines.h>
 
 // To ensure that the line is drawn from left to right
 static void	swap_line_endpoints(int *x1, int *x2, int *y1, int *y2)

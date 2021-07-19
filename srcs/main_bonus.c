@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajuncosa <anajuncosa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 15:46:38 by anajuncosa        #+#    #+#             */
-/*   Updated: 2021/07/17 15:46:50 by anajuncosa       ###   ########.fr       */
+/*   Updated: 2021/07/19 13:11:53 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include <fdf.h>
+#include <events.h>
 
 int	main(int argc, char **argv)
 {

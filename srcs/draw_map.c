@@ -6,11 +6,12 @@
 /*   By: ajuncosa <ajuncosa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:26:11 by ajuncosa          #+#    #+#             */
-/*   Updated: 2021/07/16 16:10:43 by ajuncosa         ###   ########.fr       */
+/*   Updated: 2021/07/19 13:10:48 by ajuncosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include <fdf.h>
+#include <lines.h>
 #include <math.h>
 
 static void	determine_starting_position(t_draw *draw, t_map_data map)
