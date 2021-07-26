@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
-		return (error_custom("Error: wrong number of arguments", 1));
+		return (error_custom("wrong number of arguments", 1));
 	if (!parse_map(&data.map, argv[1]))
 		return (1);
 	data.draw.altitude = 0.3;
