@@ -1,5 +1,4 @@
-#FdF
-
+# FdF
 FdF is a 42 graphic project. It's a simple wireframe 3D representation of a landscape. Example landscape maps are stored in the `maps` folder.
 
 **Usage:**
