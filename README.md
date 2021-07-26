@@ -10,3 +10,4 @@ FdF is a 42 graphic project. It's a simple wireframe 3D representation of a land
 * `W`, `A`, `S` and `D` keys for translation movement.
 * `up arrow` and `down arrow` to change altitude.
 * `scroll` up and down with your mouse to zoom in and out.
+* `esc` to quit programme.
